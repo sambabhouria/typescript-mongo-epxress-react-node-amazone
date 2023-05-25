@@ -1,1 +1,1 @@
-# TypeScript MERN ECOMMERCE AMAZONE
+# TypeScript Mongo Express React Node Ecommerce App
