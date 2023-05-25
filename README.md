@@ -1,1 +1,1 @@
-# TypeScript Mongo Express React Node Ecommerce App
+# TypeScript Mongo Express React Node Ecommerce App.
