@@ -44,7 +44,7 @@ function App() {
         <Navbar expand="lg">
           <Container>
             <LinkContainer to="/">
-              <Navbar.Brand>ecommerce app</Navbar.Brand>
+              <Navbar.Brand>Sales Force app</Navbar.Brand>
             </LinkContainer>
           </Container>
           <Nav>
