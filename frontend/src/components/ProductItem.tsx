@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Button, Card } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import { Store } from '../Store'
 import { CartItem } from '../types/Cart'
@@ -24,6 +25,7 @@ function ProductItem({ product }: { product: Product }) {
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     })
+    toast.success('Product added to the cart')
   }
 
   return (
