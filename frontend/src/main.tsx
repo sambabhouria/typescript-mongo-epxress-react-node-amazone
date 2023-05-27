@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
 import './index.css'
 import HomePage from './pages/HomePage'
@@ -21,6 +20,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { StoreProvider } from './Store'
 import PaymentMethodPage from './pages/PaymentMethodPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import PlaceOrderPage from './pages/PlaceOrderPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,8 +31,11 @@ const router = createBrowserRouter(
       <Route path="cart" element={<CartPage />} />
       <Route path="signin" element={<SigninPage />} />
       <Route path="signup" element={<SignupPage />} />
-      <Route path="shipping" element={<ShippingAddressPage />} />
-      <Route path="payment" element={<PaymentMethodPage />} />
+      <Route path="" element={<ProtectedRoute />}>
+        <Route path="shipping" element={<ShippingAddressPage />} />
+        <Route path="payment" element={<PaymentMethodPage />} />
+        <Route path="placeorder" element={<PlaceOrderPage />} />
+      </Route>
       {/* <Route path="dashboard" element={<Dashboard />} /> */}
       {/* ... etc. */}
     </Route>
