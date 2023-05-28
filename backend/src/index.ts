@@ -39,7 +39,7 @@ app.use('/api/products', productRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/keys', keyRouter)
-app.use('/api/seed', seedRouter)
+// app.use('/api/seed', seedRouter)
 
 // url for destination folder in the frontend : => dist
 // to serve all file in dist folder
