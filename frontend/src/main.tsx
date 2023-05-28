@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage'
 import ProductPage from './pages/ProductPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { StoreProvider } from './Store'
 import CartPage from './pages/CartPage'
 import SigninPage from './pages/SigninPage'
@@ -22,7 +23,7 @@ import PaymentMethodPage from './pages/PaymentMethodPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import PlaceOrderPage from './pages/PlaceOrderPage'
 import OrderPage from './pages/OrderPage'
-import { PayPalScriptProvider } from '@paypal/react-paypal-js'
+import OrderHistoryPage from './pages/OrderHistoryPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
         <Route path="payment" element={<PaymentMethodPage />} />
         <Route path="placeorder" element={<PlaceOrderPage />} />
         <Route path="/order/:id" element={<OrderPage />} />
+        <Route path="/orderhistory" element={<OrderHistoryPage />} />
       </Route>
     </Route>
   )

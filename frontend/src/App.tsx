@@ -11,7 +11,6 @@ import { Link, Outlet } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
 import { Store } from './Store'
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
   const switchModeHandler = () => {
     dispatch({ type: 'SWITCH_MODE' })
   }
-
   const signoutHandler = () => {
     dispatch({ type: 'USER_SIGNOUT' })
     localStorage.removeItem('userInfo')
@@ -44,13 +42,14 @@ function App() {
         <Navbar expand="lg">
           <Container>
             <LinkContainer to="/">
-              <Navbar.Brand>Sales Force</Navbar.Brand>
+              <Navbar.Brand>Sale Products</Navbar.Brand>
             </LinkContainer>
           </Container>
           <Nav>
             <Button variant={mode} onClick={switchModeHandler}>
               <i className={mode === 'light' ? 'fa fa-sun' : 'fa fa-moon'}></i>
             </Button>
+
             <Link to="/cart" className="nav-link">
               Cart
               {cart.cartItems.length > 0 && (
@@ -60,7 +59,14 @@ function App() {
               )}
             </Link>
             {userInfo ? (
-              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+              <NavDropdown
+                title={userInfo.name}
+                id="basic-nav-dropdown"
+                className="dropdown-menu-start"
+              >
+                <LinkContainer to="/orderhistory">
+                  <NavDropdown.Item>Order History</NavDropdown.Item>
+                </LinkContainer>
                 <Link
                   className="dropdown-item"
                   to="#signout"
