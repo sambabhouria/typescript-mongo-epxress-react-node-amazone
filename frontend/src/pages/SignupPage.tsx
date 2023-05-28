@@ -29,6 +29,10 @@ export default function SignupPage() {
   }, [navigate, redirect, userInfo])
 
   const { mutateAsync: signup, isLoading } = useSignupMutation()
+  console.log(
+    '🚀 ~ file: SignupPage.tsx:32 ~ SignupPage ~ isLoading:',
+    isLoading
+  )
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault()

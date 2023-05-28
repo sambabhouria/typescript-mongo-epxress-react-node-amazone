@@ -2,6 +2,7 @@ import { Product } from './types/Product'
 
 export const sampleProducts: Product[] = [
   {
+    _id: '', // will be set by mongodb just for jsut for typscript here
     name: 'Nike Slim shirt',
     slug: 'nike-slim-shirt',
     category: 'Shirts',
@@ -14,6 +15,7 @@ export const sampleProducts: Product[] = [
     description: 'high quality shirt',
   },
   {
+    _id: '', // will be set by mongodb just for jsut for typscript here
     name: 'Adidas Fit Shirt',
     slug: 'adidas-fit-shirt',
     category: 'Shirts',
@@ -26,6 +28,7 @@ export const sampleProducts: Product[] = [
     description: 'high quality product',
   },
   {
+    _id: '', // will be set by mongodb just for jsut for typscript here
     name: 'Lacoste Free Pants',
     slug: 'lacoste-free-pants',
     category: 'Pants',
@@ -38,6 +41,7 @@ export const sampleProducts: Product[] = [
     description: 'high quality product',
   },
   {
+    _id: '', // will be set by mongodb just for jsut for typscript here
     name: 'Nike Slim Pant',
     slug: 'nike-slim-pant',
     category: 'Pants',

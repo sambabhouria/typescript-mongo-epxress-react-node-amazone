@@ -1,6 +1,7 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
-import express from 'express'
+import express, { Request, Response } from 'express'
+import path from 'path'
 import mongoose from 'mongoose'
 import { productRouter } from './routers/productRouter'
 import { seedRouter } from './routers/seedRouter'
@@ -11,7 +12,7 @@ import { keyRouter } from './routers/keyRouter'
 dotenv.config()
 
 const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost/tsmernamazonadb'
+  process.env.MONGODB_URI || 'mongodb://localhostmongodatabasedb'
 mongoose.set('strictQuery', true)
 mongoose
   .connect(MONGODB_URI)
@@ -40,7 +41,17 @@ app.use('/api/orders', orderRouter)
 app.use('/api/keys', keyRouter)
 app.use('/api/seed', seedRouter)
 
-const PORT = 4000
+// url for destination folder in the frontend : => dist
+// to serve all file in dist folder
+app.use(express.static(path.join(__dirname, '../../frontend/dist')))
+
+//  fall all request of get method
+app.get('*', (req: Request, res: Response) =>
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
+)
+
+const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
+
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`)
 })
