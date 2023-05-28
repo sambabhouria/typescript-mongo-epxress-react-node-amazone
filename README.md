@@ -1,6 +1,6 @@
 # TypeScript Mongo Express React Node Ecommerce App.
 
-TypeScript App build with using MERN : React Mongo Express Node exactly like amazon.
+TypeScript App build with using MERN : React Mongo Express Node exactly like amazone web site.
 
 # Demo Website
 
