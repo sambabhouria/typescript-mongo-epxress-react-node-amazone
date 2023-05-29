@@ -69,6 +69,7 @@ export default function OrderPage() {
   const paypalbuttonTransactionProps: PayPalButtonsComponentProps = {
     style: { layout: 'vertical' },
     createOrder(data, actions) {
+      console.log('🚀 ~ file: OrderScreen.tsx:72 ~ createOrder ~ data:', data)
       return actions.order
         .create({
           purchase_units: [
