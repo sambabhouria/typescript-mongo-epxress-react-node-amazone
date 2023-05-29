@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import axios from 'axios'
 import React, {
   useContext,
@@ -100,7 +99,7 @@ function ProductScreen() {
     const quantity = existItem ? existItem.quantity + 1 : 1
     const { data } = await axios.get(`/api/products/${product!._id}`)
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock')
+      toast.warn('Sorry. Product is out of stock')
       return
     }
     ctxDispatch({
@@ -133,10 +132,12 @@ function ProductScreen() {
       product!.numReviews = data.numReviews
       product!.rating = data.rating
       dispatch({ type: 'REFRESH_PRODUCT', payload: product! })
-      // window.scrollTo({
-      //   behavior: 'smooth',
-      //   top: reviewsRef.current.offsetTop,
-      // })
+      window.scrollTo({
+        behavior: 'smooth',
+        top: reviewsRef.current!.offsetTop,
+      })
+      setComment('')
+      setRating(0)
     } catch (err) {
       toast.error(getError(err as ApiError))
       dispatch({ type: 'CREATE_FAIL' })
