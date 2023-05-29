@@ -10,6 +10,7 @@ export default function ShippingAddressScreen() {
   const navigate = useNavigate()
   const { state, dispatch: ctxDispatch } = useContext(Store)
   const {
+    fullBox,
     userInfo,
     cart: { shippingAddress },
   } = state
@@ -52,7 +53,7 @@ export default function ShippingAddressScreen() {
 
   useEffect(() => {
     ctxDispatch({ type: 'SET_FULLBOX_OFF' })
-  }, [ctxDispatch])
+  }, [ctxDispatch, fullBox])
 
   return (
     <div>

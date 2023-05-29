@@ -1,22 +1,24 @@
-import axios from 'axios'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { LoadScript, GoogleMap, Marker } from '@react-google-maps/api'
 import { useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 import Button from 'react-bootstrap/Button'
 import { toast } from 'react-toastify'
+import { useGetGoogleApiKeyQuery } from '../hooks/orderHooks'
 
 const defaultLocation = { lat: 45.516, lng: -73.56 }
 
 export default function MapScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store)
   const { userInfo } = state
+  console.log('🚀 ~ file: MapScreen.tsx:14 ~ MapScreen ~ userInfo:', userInfo)
   const navigate = useNavigate()
   const [googleApiKey, setGoogleApiKey] = useState('')
   const [center, setCenter] = useState(defaultLocation)
   const [location, setLocation] = useState(center)
 
   const mapRef = useRef(null)
+  const placeRef = useRef(null)
   const markerRef = useRef(null)
 
   const getUserCurrentLocation = () => {
@@ -35,20 +37,17 @@ export default function MapScreen() {
       })
     }
   }
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios('/api/keys/google', {
-        headers: { Authorization: `BEARER ${userInfo!.token}` },
-      })
-      setGoogleApiKey(data.key)
-      getUserCurrentLocation()
-    }
 
-    fetch()
-    ctxDispatch({
-      type: 'SET_FULLBOX_ON',
-    })
-  }, [ctxDispatch])
+  const { data: googleConfig } = useGetGoogleApiKeyQuery()
+
+  useEffect(() => {
+    if (googleConfig) {
+      setGoogleApiKey(googleConfig.key)
+      ctxDispatch({
+        type: 'SET_FULLBOX_ON',
+      })
+    }
+  }, [ctxDispatch, googleConfig])
 
   const onLoad = (map: any) => {
     mapRef.current = map

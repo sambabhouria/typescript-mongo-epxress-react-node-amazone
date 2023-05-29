@@ -22,7 +22,7 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhost/tsmernamazona'
+  process.env.MONGODB_URI || 'mongodb://localhost/tsmernamazone'
 mongoose.set('strictQuery', true)
 mongoose
   .connect(MONGODB_URI)
@@ -38,6 +38,8 @@ app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/keys', keyRouter)
+
+app.use('/uploads', express.static(path.join(__dirname, '../../uploads')))
 
 app.use(express.static(path.join(__dirname, '../../frontend/dist')))
 app.get('*', (req: Request, res: Response) =>

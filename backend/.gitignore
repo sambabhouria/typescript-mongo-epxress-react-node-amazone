@@ -32,3 +32,6 @@ package-lock.json
 # System Files
 .DS_Store
 Thumbs.db
+uploads/*.jpeg
+uploads/*.jpg
+uploads/*.png
