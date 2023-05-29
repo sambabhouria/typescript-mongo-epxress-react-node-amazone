@@ -18,7 +18,7 @@ function HomeScreen() {
   return (
     <div>
       <Helmet>
-        <title>Amazona</title>
+        <title>Store App</title>
       </Helmet>
       {isLoading ? (
         <LoadingBox />
@@ -40,7 +40,7 @@ function HomeScreen() {
             ))}
           </Carousel>
 
-          <h1>Latest Products</h1>
+          <h1>Latest Products 1</h1>
           <div className="products">
             <Row>
               {data!.latestProducts.map((product: Product) => (

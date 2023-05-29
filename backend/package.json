@@ -23,7 +23,8 @@
     "mongoose": "^7.2.1",
     "multer": "^1.4.5-lts.1",
     "npm": "^9.6.7",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "stripe": "^12.7.0"
   },
   "devDependencies": {
     "@typegoose/typegoose": "^11.2.0",
