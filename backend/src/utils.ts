@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import { User } from './models/userModel'
+import { User } from './models/user.model'
 
 export const generateToken = (user: User) => {
   return jwt.sign(
@@ -18,9 +18,9 @@ export const generateToken = (user: User) => {
 }
 
 export const isAuth = (req: Request, res: Response, next: NextFunction) => {
-  const { authorization } = req.headers
+  const authorization = req.headers.authorization
   if (authorization) {
-    const token = authorization.slice(7, authorization.length) // Bearer xxxxx
+    const token = authorization.slice(7, authorization.length) // Bearer XXXXXX
     const decode = jwt.verify(
       token,
       process.env.JWT_SECRET || 'somethingsecret'
@@ -34,6 +34,13 @@ export const isAuth = (req: Request, res: Response, next: NextFunction) => {
     }
     next()
   } else {
-    res.status(401).json({ message: 'No Token' })
+    res.status(401).send({ message: 'No Token' })
+  }
+}
+export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user && req.user.isAdmin) {
+    next()
+  } else {
+    res.status(401).send({ message: 'Invalid Admin Token' })
   }
 }

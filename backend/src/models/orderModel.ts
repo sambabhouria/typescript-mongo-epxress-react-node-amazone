@@ -1,6 +1,6 @@
 import { modelOptions, prop, getModelForClass, Ref } from '@typegoose/typegoose'
 import { Product } from './productModel'
-import { User } from './userModel'
+import { User } from './user.model'
 
 class ShippingAddress {
   @prop()
@@ -56,10 +56,8 @@ export class Order {
 
   @prop({ required: true })
   public paymentMethod!: string
-
   @prop()
   public paymentResult?: PaymentResult
-
   @prop({ required: true, default: 0 })
   public itemsPrice!: number
   @prop({ required: true, default: 0 })

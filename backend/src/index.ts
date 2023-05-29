@@ -1,18 +1,28 @@
 import cors from 'cors'
-import dotenv from 'dotenv'
-import express, { Request, Response } from 'express'
 import path from 'path'
+import dotenv from 'dotenv'
+import express, { NextFunction, Request, Response } from 'express'
 import mongoose from 'mongoose'
-import { productRouter } from './routers/productRouter'
-import { seedRouter } from './routers/seedRouter'
-import { userRouter } from './routers/userRouter'
-import { orderRouter } from './routers/orderRouter'
-import { keyRouter } from './routers/keyRouter'
+import { userRouter } from './routers/userRoutes'
+import { orderRouter } from './routers/orderRoutes'
+import { productRouter } from './routers/productRoutes'
+import { uploadRouter } from './routers/uploadRoutes'
+import seedRouter from './routers/seedRoutes'
+import keyRouter from './routers/keyRoutes'
 
 dotenv.config()
 
+const app = express()
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:5173'],
+  })
+)
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 const MONGODB_URI =
-  process.env.MONGODB_URI || 'mongodb://localhostmongodatabasedb'
+  process.env.MONGODB_URI || 'mongodb://localhost/tsmernamazona'
 mongoose.set('strictQuery', true)
 mongoose
   .connect(MONGODB_URI)
@@ -22,36 +32,24 @@ mongoose
   .catch(() => {
     console.log('error mongodb')
   })
-
-const app = express()
-
-app.use(
-  cors({
-    credentials: true,
-    origin: ['http://localhost:5173'],
-  })
-)
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-app.use('/api/products', productRouter)
+app.use('/api/seed', seedRouter)
+app.use('/api/uploads', uploadRouter)
 app.use('/api/users', userRouter)
+app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/keys', keyRouter)
-app.use('/api/seed', seedRouter)
 
-// url for destination folder in the frontend : => dist
-// to serve all file in dist folder
 app.use(express.static(path.join(__dirname, '../../frontend/dist')))
-
-//  fall all request of get method
-app.get('*', (req: Request, res: Response) =>
+app.get('*', (req, res: Response) =>
   res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
 )
 
-const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(500).send({ message: err.message })
+  next()
+})
 
+const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
 app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`)
 })

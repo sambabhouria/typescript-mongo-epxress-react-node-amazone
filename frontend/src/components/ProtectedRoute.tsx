@@ -1,14 +1,14 @@
-import { useContext } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
-import { Store } from '../Store'
+import { Navigate } from 'react-router-dom'
+import { ProtectedRouteProps } from '../types/ProtectedRouteProps'
 
-export default function ProtectedRoute() {
-  const {
-    state: { userInfo },
-  } = useContext(Store)
-  if (userInfo) {
-    return <Outlet />
+export default function ProtectedRoute({
+  isAuthenticated,
+  authenticationPath,
+  outlet,
+}: ProtectedRouteProps) {
+  if (isAuthenticated) {
+    return outlet
   } else {
-    return <Navigate to="/signin" />
+    return <Navigate to={{ pathname: authenticationPath }} />
   }
 }
