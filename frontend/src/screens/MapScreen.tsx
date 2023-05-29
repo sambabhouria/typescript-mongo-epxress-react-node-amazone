@@ -36,6 +36,10 @@ export default function MapScreen() {
       })
     }
   }
+  console.log(
+    '🚀 ~ file: MapScreen.tsx:39 ~ getUserCurrentLocation ~ getUserCurrentLocation:',
+    getUserCurrentLocation
+  )
 
   const { data: googleConfig } = useGetGoogleApiKeyQuery()
 

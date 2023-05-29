@@ -81,7 +81,7 @@ export default function ProductEditScreen() {
 
   const uploadFileHandler = async (
     e: React.FormEvent<HTMLInputElement>,
-    forImages: boolean = false
+    forImages = false
   ) => {
     const file = e.currentTarget.files![0]
     const bodyFormData = new FormData()

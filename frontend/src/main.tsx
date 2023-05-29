@@ -31,7 +31,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import HomeScreen from './screens/HomeScreen'
 import OrderListScreen from './screens/OrderListScreen'
 import AdminRoute from './components/AdminRoute'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import DashboardScreen from './screens/DashboardScreen'
 
 const router = createBrowserRouter(

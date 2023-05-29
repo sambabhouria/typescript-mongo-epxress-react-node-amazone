@@ -87,7 +87,7 @@ export default function SearchScreen() {
       page?: number
       query?: string
     },
-    skipPathname: boolean = false
+    skipPathname = false
   ) => {
     const filterPage = filter.page || page
     const filterCategory = filter.category || category

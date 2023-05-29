@@ -7,7 +7,8 @@ import { Store } from '../Store'
 
 export default function ShippingAddressPage() {
   const navigate = useNavigate()
-  const { state, dispatch } = useContext(Store)
+  // const { state, dispatch } = useContext(Store)
+  const { state } = useContext(Store)
   const {
     userInfo,
     cart: { shippingAddress },
@@ -27,16 +28,16 @@ export default function ShippingAddressPage() {
 
   const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    dispatch({
-      type: 'SAVE_SHIPPING_ADDRESS',
-      payload: {
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-      },
-    })
+    // dispatch({
+    //   type: 'SAVE_SHIPPING_ADDRESS',
+    //   payload: {
+    //     fullName,
+    //     address,
+    //     city,
+    //     postalCode,
+    //     country,
+    //   },
+    // })
     localStorage.setItem(
       'shippingAddress',
       JSON.stringify({
