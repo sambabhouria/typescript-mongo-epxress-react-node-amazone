@@ -85,6 +85,7 @@ export default function OrderPage() {
         })
     },
     onApprove(data, actions) {
+      console.log('🚀 ~ file: OrderScreen.tsx:88 ~ onApprove ~ data:', data)
       return actions.order!.capture().then(async (details) => {
         try {
           payOrder({ orderId: orderId!, ...details })
