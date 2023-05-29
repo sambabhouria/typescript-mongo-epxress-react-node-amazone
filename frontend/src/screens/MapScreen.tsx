@@ -9,7 +9,7 @@ import { useGetGoogleApiKeyQuery } from '../hooks/orderHooks'
 const defaultLocation = { lat: 45.516, lng: -73.56 }
 
 export default function MapScreen() {
-  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const { state, dispatch } = useContext(Store)
   const { userInfo } = state
   console.log('🚀 ~ file: MapScreen.tsx:14 ~ MapScreen ~ userInfo:', userInfo)
   const navigate = useNavigate()
@@ -18,7 +18,6 @@ export default function MapScreen() {
   const [location, setLocation] = useState(center)
 
   const mapRef = useRef(null)
-  const placeRef = useRef(null)
   const markerRef = useRef(null)
 
   const getUserCurrentLocation = () => {
@@ -43,11 +42,11 @@ export default function MapScreen() {
   useEffect(() => {
     if (googleConfig) {
       setGoogleApiKey(googleConfig.key)
-      ctxDispatch({
+      dispatch({
         type: 'SET_FULLBOX_ON',
       })
     }
-  }, [ctxDispatch, googleConfig])
+  }, [dispatch, googleConfig])
 
   const onLoad = (map: any) => {
     mapRef.current = map
@@ -66,7 +65,7 @@ export default function MapScreen() {
   }
 
   const onConfirm = () => {
-    ctxDispatch({
+    dispatch({
       type: 'SAVE_SHIPPING_ADDRESS_MAP_LOCATION',
       payload: {
         lat: location.lat,

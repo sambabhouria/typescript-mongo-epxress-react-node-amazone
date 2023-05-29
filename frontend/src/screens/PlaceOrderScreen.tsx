@@ -16,9 +16,12 @@ import { useCreateOrderMutation } from '../hooks/orderHooks'
 
 export default function PlaceOrderScreen() {
   const navigate = useNavigate()
-
-  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const { state, dispatch } = useContext(Store)
   const { cart, userInfo } = state
+  console.log(
+    '🚀 ~ file: PlaceOrderScreen.tsx:22 ~ PlaceOrderScreen ~ userInfo:',
+    userInfo
+  )
 
   const round2 = (num: number) => Math.round(num * 100 + Number.EPSILON) / 100 // 123.2345 => 123.23
   cart.itemsPrice = round2(
@@ -41,7 +44,7 @@ export default function PlaceOrderScreen() {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       })
-      ctxDispatch({ type: 'CART_CLEAR' })
+      dispatch({ type: 'CART_CLEAR' })
       localStorage.removeItem('cartItems')
       navigate(`/order/${data.order._id}`)
     } catch (err) {

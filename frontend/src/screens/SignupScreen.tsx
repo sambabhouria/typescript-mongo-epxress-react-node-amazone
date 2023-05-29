@@ -21,10 +21,14 @@ export default function SignupScreen() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const { state, dispatch } = useContext(Store)
   const { userInfo } = state
 
   const { mutateAsync: signup, isLoading } = useSignupMutation()
+  console.log(
+    '🚀 ~ file: SignupScreen.tsx:28 ~ SignupScreen ~ isLoading:',
+    isLoading
+  )
 
   const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -38,7 +42,7 @@ export default function SignupScreen() {
         email,
         password,
       })
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data })
+      dispatch({ type: 'USER_SIGNIN', payload: data })
       localStorage.setItem('userInfo', JSON.stringify(data))
       navigate(redirect || '/')
     } catch (err) {

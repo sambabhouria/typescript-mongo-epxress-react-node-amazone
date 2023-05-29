@@ -19,8 +19,7 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const { state, dispatch: ctxDispatch } = useContext(Store)
+  const { state, dispatch } = useContext(Store)
   const { userInfo } = state
 
   const { mutateAsync: signin, isLoading } = useSigninMutation()
@@ -32,7 +31,7 @@ export default function SigninScreen() {
         email,
         password,
       })
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data })
+      dispatch({ type: 'USER_SIGNIN', payload: data })
       localStorage.setItem('userInfo', JSON.stringify(data))
       navigate(redirect || '/')
     } catch (err) {
